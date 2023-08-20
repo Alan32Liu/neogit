@@ -29,7 +29,7 @@ end
 
 ---@param name string Syntax group name.
 local function get_fg(name)
-  local color = vim.api.nvim_get_hl(0, { name = name })
+  local color = vim.api.nvim__get_hl_defs and vim.api.nvim__get_hl_defs(0)[name] or vim.api.nvim_get_hl(0, {name=name})
   if color["link"] then
     return get_fg(color["link"])
   end
@@ -40,7 +40,7 @@ end
 
 ---@param name string Syntax group name.
 local function get_bg(name)
-  local color = vim.api.nvim_get_hl(0, { name = name })
+  local color = vim.api.nvim__get_hl_defs and vim.api.nvim__get_hl_defs(0)[name] or vim.api.nvim_get_hl(0, {name=name})
   if color["link"] then
     return get_bg(color["link"])
   end
